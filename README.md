@@ -14,7 +14,7 @@ We want to recover the unknown vector $\boldsymbol{\theta}$ using Markov Chain M
 In the present setting, the maximum likelihood estimate of $\boldsymbol{\theta}$ is given by the value $\widehat{\boldsymbol{\theta}} \in \Theta$ that maximizes the likelihood function
 $L(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}) = \frac{\exp\left\{-\frac{1}{2}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta})^{\top}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta})\right\}}{(2\pi)^{m/2}},$
 given the observations $(\mathbf{X}, \mathbf{y})$. Here the superscript $\top$ represents the transpose operation. We can equivalently cast the question in the form of a minimization problem. Indeed, the maximum likelihood estimate of $\boldsymbol{\theta}$ is given by the value $\widehat{\boldsymbol{\theta}} \in \Theta$ that minimizes the function
-$H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}) = -(\mathbf{y} - \mathbf{X}\boldsymbol{\theta})^{\top}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta}),$
+$H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}) = (\mathbf{y} - \mathbf{X}\boldsymbol{\theta})^{\top}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta}),$
 given the observations $(\mathbf{X}, \mathbf{y})$.
 
 ## Metropolis-Hastings algorithm
