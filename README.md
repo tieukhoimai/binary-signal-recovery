@@ -12,15 +12,29 @@ $\mathbf{y} = \mathbf{X}\boldsymbol{\theta} + \boldsymbol{\xi}.$
 We want to recover the unknown vector $\boldsymbol{\theta}$ using Markov Chain Monte Carlo techniques, given the observations $(\mathbf{X}, \mathbf{y})$. We are interested in the case when $d$ is large. We recover $\boldsymbol{\theta}$ by finding the maximum likelihood estimate.
 
 In the present setting, the maximum likelihood estimate of $\boldsymbol{\theta}$ is given by the value $\widehat{\boldsymbol{\theta}} \in \Theta$ that maximizes the likelihood function
-$L(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}) = \frac{\exp\left\{-\frac{1}{2}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta})^{\top}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta})\right\}}{(2\pi)^{m/2}},$
+
+$$
+L(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}) = \frac{\exp\left(-\frac{1}{2}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta})^{\top}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta})\right)}{(2\pi)^{m/2}},
+$$
+
+
 given the observations $(\mathbf{X}, \mathbf{y})$. Here the superscript $\top$ represents the transpose operation. We can equivalently cast the question in the form of a minimization problem. Indeed, the maximum likelihood estimate of $\boldsymbol{\theta}$ is given by the value $\widehat{\boldsymbol{\theta}} \in \Theta$ that minimizes the function
-$H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}) = (\mathbf{y} - \mathbf{X}\boldsymbol{\theta})^{\top}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta}),$
+
+$$H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}) = (\mathbf{y} - \mathbf{X}\boldsymbol{\theta})^{\top}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta}),$$
+
 given the observations $(\mathbf{X}, \mathbf{y})$.
 
 ## Metropolis-Hastings algorithm
 
 Let $\beta > 0$ be a fixed real parameter. We construct the Metropolis-Hastings (discrete-time) Markov chain on the state space $\Theta$, with stationary distribution
-$\pi_{\beta}(\boldsymbol{\theta}) = \frac{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta})\}}{Z_{\beta}}, \text{ with } Z_{\beta} = \sum_{\boldsymbol{\theta} \in \Theta} \exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta})\}.$
+
+$$
+\pi_{\beta}(\boldsymbol{\theta}) = \frac{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta})\}}{Z_{\beta}}
+$$
+
+$$
+Z_{\beta} = \sum_{\boldsymbol{\theta} \in \Theta} \exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta})\}.
+$$
 
 Observe that the probability distribution $\pi_{\beta}$ concentrates on the maximum likelihood estimate as $\beta \to +\infty$. Therefore, if we choose $\beta$ sufficiently large and we run the chain for a large number $N$ of steps, we can take the state visited at time $N$ as the maximum likelihood estimate $\widehat{\boldsymbol{\theta}}$.
 
@@ -40,10 +54,10 @@ The following algorithm produces the first $N$ steps $\boldsymbol{\theta}_1, \ld
           1 - \boldsymbol{\theta}^{t-1}(j) & \text{if } j = i
       \end{cases} \text{ for } j = 1, 2, \ldots, d.$
    3. Set
-      $\boldsymbol{\theta}^t = \begin{cases}
+      $$\boldsymbol{\theta}^t = \begin{cases}
           \boldsymbol{\theta}^* & \text{with probability } \min\left\{1, \frac{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^*)\}}{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^{t-1})\}}\right\} \\
           \boldsymbol{\theta}^{t-1} & \text{with probability } 1 - \min\left\{1, \frac{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^*)\}}{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^{t-1})\}}\right\}
-      \end{cases}.$
+      \end{cases}.$$
 
 ## Project
 
