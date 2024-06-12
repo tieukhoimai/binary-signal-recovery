@@ -49,15 +49,21 @@ The following algorithm produces the first $N$ steps $\boldsymbol{\theta}_1, \ld
 2. For $t = 1, 2, \ldots, N - 1$:
    1. Pick $i$ uniformly at random in $\{1, 2, \ldots, d\}$.
    2. Let the proposed state be $\boldsymbol{\theta}^* \in \Theta$, with entries
-      $\boldsymbol{\theta}^*(j) = \begin{cases}
+      $$
+      \boldsymbol{\theta}^*(j) = 
+      \begin{cases}
           \boldsymbol{\theta}^{t-1}(j) & \text{if } j \neq i \\
           1 - \boldsymbol{\theta}^{t-1}(j) & \text{if } j = i
-      \end{cases} \text{ for } j = 1, 2, \ldots, d.$
+      \end{cases} \text{ for } j = 1, 2, \ldots, d.
+      $$
    3. Set
-      $$\boldsymbol{\theta}^t = \begin{cases}
+      $$
+      \boldsymbol{\theta}^t = 
+      \begin{cases}
           \boldsymbol{\theta}^* & \text{with probability } \min\left\{1, \frac{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^*)\}}{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^{t-1})\}}\right\} \\
           \boldsymbol{\theta}^{t-1} & \text{with probability } 1 - \min\left\{1, \frac{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^*)\}}{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^{t-1})\}}\right\}
-      \end{cases}.$$
+      \end{cases}.
+      $$
 
 ## Project
 
