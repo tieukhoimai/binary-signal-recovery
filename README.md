@@ -40,13 +40,18 @@ Observe that the probability distribution $\pi_{\beta}$ concentrates on the maxi
 
 The following algorithm produces the first $N$ steps $\boldsymbol{\theta}_1, \ldots, \boldsymbol{\theta}_N$ of the Metropolis-Hasting chain on $\Theta$.
 
-**Input:** value of the parameter $\beta$; number of steps $N$; initial state $\bar{\boldsymbol{\theta}} \in \Theta$;
+**Input:**
+- Value of the parameter $\beta$
+- Number of steps $N$; 
+- Initial state $\bar{\boldsymbol{\theta}} \in \Theta$;
 
 **Output:** trajectory of the Metropolis-Hastings chain starting at $\bar{\boldsymbol{\theta}}$;
 
 **Procedure**
-1. Set $\boldsymbol{\theta}_0 = \bar{\boldsymbol{\theta}}$.
-2. For $t = 1, 2, \ldots, N - 1$:
+
+*Step 1.* Set $\boldsymbol{\theta}_0 = \bar{\boldsymbol{\theta}}$.
+
+*Step 2.* For $t = 1, 2, \ldots, N - 1$:
    1. Pick $i$ uniformly at random in $\{1, 2, \ldots, d\}$.
    2. Let the proposed state be $\boldsymbol{\theta}^* \in \Theta$, with entries
       $$
@@ -67,6 +72,24 @@ The following algorithm produces the first $N$ steps $\boldsymbol{\theta}_1, \ld
 
 ## Project
 
-By implementing the Metropolis-Hastings algorithm above, we determine an estimate $\widehat{\boldsymbol{\theta}}$ of a signal $\boldsymbol{\theta} \in \Theta$ for any given realization of $(\mathbf{X}, \mathbf{y})$. To check the quality of our estimate, we analyze the mean squared error
-$E = \mathbb{E}\left[(\widehat{\boldsymbol{\theta}} - \boldsymbol{\theta})^{\top}(\widehat{\boldsymbol{\theta}} - \boldsymbol{\theta})\right],$
-where the expectation is over $\boldsymbol{\theta}$ and $(\mathbf{X}, \mathbf{y})$, for different values of $m$ (number of measurements).
+By implementing the Metropolis-Hastings algorithm above, we determine an estimate $\hat{\theta}$ of a signal $\theta \in \Theta$ for any given realization of $(X, y)$. To check the quality of our estimate, we analyze the mean squared error
+
+$$
+\mathcal{E}=E\left((\hat{\theta}-\theta)^{\top}(\hat{\theta}-\theta)\right)
+$$
+
+where the expectation is over $\theta$ and $(X, y)$, for different values of $m$ (number of measurements).
+
+Fix $d=10$. For every $1 \leq m \leq 15$, compute the mean squared error. Plot $\mathcal{E}$ as a function of $m$ and comment on the characteristics of your plot. What is the minimum value of $\frac{m}{d}$ required to reliably recover $\theta$ ?
+
+Remark. The mean squared error $\mathcal{E}$ can be estimated by exploiting the law of large numbers. Let $M$ denote the number of independent realizations of $(\theta, X, y)$. Moreover, let $\hat{\theta}^{(j)}$ be the maximum likelihood estimate of the $j$-th signal $\theta^{(j)}$, obtained by the $j$-th run of the Metropolis-Hastings algorithm, given $\left(X^{(j)}, y^{(j)}\right)$. If $M$ is sufficiently large (use $M$ of order $10^{4}$ ), then we have the approximation
+
+$$
+\mathcal{E} \approx \frac{1}{M} \sum_{j=1}^{M}\left(\hat{\theta}^{(j)}-\theta^{(j)}\right)^{\top}\left(\hat{\theta}^{(j)}-\theta^{(j)}\right)
+$$
+
+## References
+
+[1] Levin D.A. and Peres Y., Markov chains and mixing times, Volume 107, American Mathematical Society, 2017
+
+[2] Ross S.M., Simulation, Academic Press, 2006
