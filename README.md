@@ -1,7 +1,5 @@
 # Binary signal recovery
 
-![thumbnail](img/thumbnail.png)
-
 ## I. Generate data
 
 - $\mathbf{X} \in \mathbb{R}^{m \times d}$ be a random sensing matrix with i.i.d. entries sampled from $\mathcal{N}(0, 1)$.
@@ -32,9 +30,7 @@ def generate_data(m, d):
 
 Since $\boldsymbol{\xi}$ is a multivariate normal, its probability density function (pdf) is:
 
-
 $$\mathcal{L}(\xi) = (2\pi)^{-m/2} \times exp\{-\frac{1}{2} \xi^T \xi\}$$
-
 
 Now, we want to find the probability of observing $y$ given $X$ and $\theta$, which is equivalent to finding the probability of the noise ξ being equal to $\mathbf{y} - \mathbf{X} \boldsymbol{\theta}$:
 
@@ -49,11 +45,13 @@ $$\mathcal{L}(X, y; \theta) = \frac{exp\{-\frac{1}{2} (y - X \theta)^T (y - X\th
 ### 2. Minimization Function ($H$):
 
 - To maximize this function, we can maximize the logarithm of this function. Take the logarithm, we have:
+  
 $$
 \log\mathcal{L}(X, y ; \theta)=-\frac{1}{2}(y-X \theta)^{\top}(y-X \theta)-\dfrac{m}{2}\log(2 \pi),
 $$
 
 - We can equivalently cast the question in the form of a minimization problem. Indeed, the maximum likelihood estimate of $\theta$ is given by the value $\hat{\theta} \in \Theta$ that minimizes the function
+
 $$
 H(X, y ; \theta)=-\left [-(y-X\theta)^{\top}(y-X\theta)\right ]=(y-X\theta)^{\top}(y-X\theta),
 $$
@@ -61,6 +59,7 @@ $$
 given the observations $(X, y)$, and $\dfrac{1}{2}, \dfrac{m}{2}\log(2 \pi)$ are constants, so we can vanish them.
 
 - To simplify the optimization problem, we define a new function $H(X, y; \theta)$ as the exponent:
+
 $$H(X, y; \theta) = (y - X\theta)^T (y - X\theta)$$
 
 By minimizing $H(X, y; \theta)$, we essentially maximize the likelihood function $\mathcal{L}(X, y; \theta)$ and find the maximum likelihood estimate of $\theta$.
@@ -94,7 +93,9 @@ The following algorithm produces the first $N$ steps $\boldsymbol{\theta}_1, \ld
 
 **Output:** trajectory of the Metropolis-Hastings chain starting at $\bar{\boldsymbol{\theta}}$;
 
-**Procedure**
+<img src="img/thumbnail.png" alt="thumbnail" width="750"/>
+
+<!-- **Procedure**
 
 *Step 1.* Set $\boldsymbol{\theta}_0 = \bar{\boldsymbol{\theta}}$.
 
@@ -115,7 +116,7 @@ The following algorithm produces the first $N$ steps $\boldsymbol{\theta}_1, \ld
           \boldsymbol{\theta}^* & \text{with probability } \min\left\{1, \frac{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^*)\}}{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^{t-1})\}}\right\} \\
           \boldsymbol{\theta}^{t-1} & \text{with probability } 1 - \min\left\{1, \frac{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^*)\}}{\exp\{-\beta H(\mathbf{X}, \mathbf{y}; \boldsymbol{\theta}^{t-1})\}}\right\}
       \end{cases}.
-      $$
+      $$ -->
 
 ```python
 def metropolis_hastings(X, y, beta, M, initial_theta):
